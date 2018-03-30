@@ -1,4 +1,5 @@
 # Build and copy executables to root dir
+mkdir -p build
 cd build
 cmake ..
 make

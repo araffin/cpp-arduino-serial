@@ -96,57 +96,6 @@ int main(int argc, char const *argv[])
 }
 
 /**
- * Send one order (one byte) to the other arduino
- * @param myOrder type of order
- */
-void write_order(fstream &file, enum Order myOrder)
-{
-	uint8_t* Order = (uint8_t*) &myOrder;
-  file.write((char *)Order, sizeof(uint8_t));
-}
-
-/**
- * Send a int of one byte
- * @param myOrder type of order
- */
-void write_i8(fstream &file, int8_t num)
-{
-	int8_t* oneByte = (int8_t*) &num;
-  file.write((char *)oneByte, sizeof(int8_t));
-}
-
-
-/**
- * Send a two bytes signed int via the serial
- * @param nb the number to send
- */
-void write_i16(fstream &file, int16_t nb)
-{
-	int8_t buffer[2] = {(int8_t) (nb & 0xff), (int8_t) (nb >> 8)};
-	file.write((char *)buffer, 2*sizeof(int8_t));
-}
-
-/**
- * Send a four bytes signed int (long) via the serial
- * @param nb the number to send (−2,147,483,647, +2,147,483,647)
- */
-void write_i32(fstream &file, int32_t nb)
-{
-	int8_t buffer[4] = {(int8_t) (nb & 0xff), (int8_t) (nb >> 8 & 0xff), (int8_t) (nb >> 16 & 0xff), (int8_t) (nb >> 24 & 0xff)};
-  file.write((char *)buffer, 4*sizeof(int8_t));
-}
-
-/**
- * Send a two bytes unsigned (max 2**16 -1) int via the serial
- * @param nb the number to send
- */
-void write_u32(fstream &file, uint16_t nb)
-{
-	uint8_t buffer[2] = {(uint8_t) (nb & 0xff), (uint8_t) (nb >> 8)};
-	file.write((char *)buffer, 2*sizeof(uint8_t));
-}
-
-/**
  * Ask the user to enter an integer
  * Prompt until the input is valid
  * @param  infoMessage The message displayed to the user
