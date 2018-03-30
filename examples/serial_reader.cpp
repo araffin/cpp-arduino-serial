@@ -3,16 +3,27 @@
 #include <algorithm> // For strtolower
 #include <exception>
 #include <bitset>//Binary representation
-#include <unistd.h>
 #include "serial_reader.h"
 
-// using namespace LibSerial;
 using namespace std;
 
-SerialPort serial_port(PORT);
 
 int main(int argc, char const *argv[])
 {
+	string defaultFileName = DEFAULT_PORT;
+	string serialFileName = "";
+
+	cout << "Enter the name of the serial file (default: " << defaultFileName << " )" << endl;
+	getline(cin, serialFileName);
+
+	if(serialFileName.empty())
+	{
+		cout << "Using default serial file : " << defaultFileName << endl;
+		serialFileName = defaultFileName;
+	}
+
+	SerialPort serial_port(serialFileName);
+
 	const unsigned int msTimeout = TIMEOUT_MS;
 	Order currentOrder;
 	serial_port.Open(SerialPort::BAUD_115200, SerialPort::CHAR_SIZE_8,
@@ -71,7 +82,7 @@ int main(int argc, char const *argv[])
 			}
 			case STOP:
 			{
-				cout << "stop!" << endl;
+				cout << "STOP!" << endl;
 				break;
 			}
 			default:

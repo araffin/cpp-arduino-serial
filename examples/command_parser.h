@@ -1,9 +1,6 @@
 #ifndef COMMAND_PARSER_H
 #define COMMAND_PARSER_H
-#include <fstream>
-
-#include "order.h"
-#include <lib.hpp>
+#include <robust_serial.hpp>
 
 #define PORT "/dev/ttyACM0"
 
