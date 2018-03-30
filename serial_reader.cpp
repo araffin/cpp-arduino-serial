@@ -28,7 +28,7 @@ int main(int argc, char const *argv[])
 		// while (!serial_port.IsDataAvailable()){}
 		try
 		{
-			currentOrder = read_order(msTimeout);
+			currentOrder = read_order(serial_port, msTimeout);
 			//  ReadTimeout
 		}
 		catch(exception& e)
@@ -47,13 +47,13 @@ int main(int argc, char const *argv[])
 			}
 			case SERVO:
 			{
-				int16_t angle = read_i16();
+				int16_t angle = read_i16(serial_port);
 				cout << "SERVO: angle=" << angle << endl;
 				break;
 			}
 			case MOTOR:
 			{
-				int speed = read_i8();
+				int speed = read_i8(serial_port);
 				cout << "MOTOR: speed=" << speed << endl;
 				break;
 			}
@@ -64,7 +64,7 @@ int main(int argc, char const *argv[])
 			}
 			case ERROR:
 			{
-				int16_t errorCode = read_i16();
+				int16_t errorCode = read_i16(serial_port);
 				cout << "ERROR " << errorCode << endl;
 				break;
 			}
@@ -96,7 +96,7 @@ int main(int argc, char const *argv[])
  * Read two bytes (16 bits) from the serial and convert it to an unsigned int
  * @return the decoded unsigned int
  */
-uint16_t read_u16()
+uint16_t read_u16(SerialPort &serial_port)
 {
   SerialPort::DataBuffer charBuff;
   serial_port.Read(charBuff, 2);
@@ -106,7 +106,7 @@ uint16_t read_u16()
  * Read two bytes from the serial and convert it to an int
  * @return the decoded int
  */
-int16_t read_i16()
+int16_t read_i16(SerialPort &serial_port)
 {
   SerialPort::DataBuffer charBuff;
   serial_port.Read(charBuff, 2);
@@ -117,7 +117,7 @@ int16_t read_i16()
  * Read four bytes from the serial and convert it to an long
  * @return the decoded int
  */
-int32_t read_i32()
+int32_t read_i32(SerialPort &serial_port)
 {
   SerialPort::DataBuffer charBuff;
   serial_port.Read(charBuff, 4);
@@ -128,7 +128,7 @@ int32_t read_i32()
  * Read one byte from the serial and convert it to an int
  * @return the decoded int
  */
-int8_t read_i8()
+int8_t read_i8(SerialPort &serial_port)
 {
   SerialPort::DataBuffer charBuff;
   serial_port.Read(charBuff, 1);
@@ -140,7 +140,7 @@ int8_t read_i8()
  * Read one byte from the serial and cast it to an Order
  * @return the order received
  */
-Order read_order(const unsigned int msTimeout)
+Order read_order(SerialPort &serial_port, const unsigned int msTimeout)
 {
   SerialPort::DataBuffer buffer;
   serial_port.Read(buffer, 1, msTimeout);

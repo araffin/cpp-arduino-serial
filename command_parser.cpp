@@ -60,24 +60,24 @@ int main(int argc, char const *argv[])
 		if (cmd == "motor")
 		{
 			int speed = getIntFromUserInput("speed (between -100 and 100) ?");
-			write_order(MOTOR);
-			write_i8(speed);
+			write_order(serialFile, MOTOR);
+			write_i8(serialFile, speed);
 			cmd += " " + to_string(speed);
 		}
 		else if (cmd == "servo")
 		{
 			int angle = getIntFromUserInput("angle (between  0 and 180) ?");
-			write_order(SERVO);
-			write_i16(angle);
+			write_order(serialFile, SERVO);
+			write_i16(serialFile, angle);
 			cmd += " " + to_string(angle);
 		}
 		else if (cmd == "hello")
 		{
-			write_order(HELLO);
+			write_order(serialFile, HELLO);
 		}
 		else if (cmd == "stop")
 		{
-			write_order(STOP);
+			write_order(serialFile, STOP);
 		}
 		else if (cmd == "exit")
 		{
@@ -99,20 +99,20 @@ int main(int argc, char const *argv[])
  * Send one order (one byte) to the other arduino
  * @param myOrder type of order
  */
-void write_order(enum Order myOrder)
+void write_order(fstream &file, enum Order myOrder)
 {
 	uint8_t* Order = (uint8_t*) &myOrder;
-  serialFile.write((char *)Order, sizeof(uint8_t));
+  file.write((char *)Order, sizeof(uint8_t));
 }
 
 /**
  * Send a int of one byte
  * @param myOrder type of order
  */
-void write_i8(int8_t num)
+void write_i8(fstream &file, int8_t num)
 {
 	int8_t* oneByte = (int8_t*) &num;
-  serialFile.write((char *)oneByte, sizeof(int8_t));
+  file.write((char *)oneByte, sizeof(int8_t));
 }
 
 
@@ -120,30 +120,30 @@ void write_i8(int8_t num)
  * Send a two bytes signed int via the serial
  * @param nb the number to send
  */
-void write_i16(int16_t nb)
+void write_i16(fstream &file, int16_t nb)
 {
 	int8_t buffer[2] = {(int8_t) (nb & 0xff), (int8_t) (nb >> 8)};
-	serialFile.write((char *)buffer, 2*sizeof(int8_t));
+	file.write((char *)buffer, 2*sizeof(int8_t));
 }
 
 /**
  * Send a four bytes signed int (long) via the serial
  * @param nb the number to send (−2,147,483,647, +2,147,483,647)
  */
-void write_i32(int32_t nb)
+void write_i32(fstream &file, int32_t nb)
 {
 	int8_t buffer[4] = {(int8_t) (nb & 0xff), (int8_t) (nb >> 8 & 0xff), (int8_t) (nb >> 16 & 0xff), (int8_t) (nb >> 24 & 0xff)};
-  serialFile.write((char *)buffer, 4*sizeof(int8_t));
+  file.write((char *)buffer, 4*sizeof(int8_t));
 }
 
 /**
  * Send a two bytes unsigned (max 2**16 -1) int via the serial
  * @param nb the number to send
  */
-void write_u32(uint16_t nb)
+void write_u32(fstream &file, uint16_t nb)
 {
 	uint8_t buffer[2] = {(uint8_t) (nb & 0xff), (uint8_t) (nb >> 8)};
-	serialFile.write((char *)buffer, 2*sizeof(uint8_t));
+	file.write((char *)buffer, 2*sizeof(uint8_t));
 }
 
 /**
