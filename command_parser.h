@@ -8,12 +8,11 @@ int getIntFromUserInput(std::string infoMessage);
 unsigned int getUnsignedIntFromUserInput(std::string infoMessage);
 long getLongIntFromUserInput(std::string infoMessage);
 
-void sendOneOrder(enum Order myOrder);
 
-void sendOrder(enum Order myOrder);
-void sendOneByteInt(int8_t nb);
-void sendTwoBytesInt(int16_t nb);
-void sendFourBytesInt(int32_t nb);
-void sendTwoBytesUnsignedInt(uint16_t nb);
+void write_order(enum Order myOrder);
+void write_i8(int8_t num);
+void write_i16(int16_t num);
+void write_u16(uint16_t num);
+void write_i32(int32_t num);
 
 #endif

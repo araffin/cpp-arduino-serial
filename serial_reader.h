@@ -6,10 +6,10 @@
 #define MAX_N_ORDER 1000
 #define TIMEOUT_MS 30000 // 30s
 
-Order readOrder(const unsigned int msTimeout);
-int8_t readOneByteIntFromSerial();
-int16_t readTwoBytesIntFromSerial();
-uint16_t readUnsignedIntFromSerial();
-int32_t readFourBytesIntFromSerial();
+Order read_order(const unsigned int msTimeout);
+int8_t read_i8();
+int16_t read_i16();
+uint16_t read_u16();
+int32_t read_i32();
 
 #endif
