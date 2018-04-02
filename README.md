@@ -1,5 +1,8 @@
 # Robust Arduino Serial Protocol in C++
 
+[![Build Status](https://travis-ci.org/araffin/cpp-arduino-serial.svg?branch=master)](https://travis-ci.org/araffin/cpp-arduino-serial)
+
+Dependency (libserial):
 ```
 sudo apt-get install libserial-dev
 ```
