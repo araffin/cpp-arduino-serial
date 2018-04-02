@@ -7,5 +7,5 @@ install:
 
 script:
   - cd examples/
-  - ../build.sh
+  - ./build.sh
   - ./bin/file_read_write.x -y
