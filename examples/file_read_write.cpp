@@ -13,8 +13,12 @@ int main(int argc, char const *argv[])
 	string default_filename = "test.log";
 	string serial_filename = "";
 
-	cout << "Enter the name of the serial file (default: " << default_filename << " )" << endl;
-  getline(cin, serial_filename);
+	// Skip the prompt if an argument is passed
+	if (argc < 1)
+	{
+		cout << "Enter the name of the serial file (default: " << default_filename << " )" << endl;
+		getline(cin, serial_filename);
+	}
 
 	if(serial_filename.empty())
 	{

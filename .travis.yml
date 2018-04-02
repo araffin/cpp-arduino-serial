@@ -1,0 +1,8 @@
+language: cpp
+compiler: gcc
+dist: trusty
+
+script:
+  - cd examples/
+  - ../build.sh
+  - ./bin/file_read_write.x -y
