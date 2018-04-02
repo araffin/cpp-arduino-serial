@@ -1,7 +1,7 @@
-# Build and copy executables to root dir
+# Build and copy executables to bin/ dir
 mkdir -p build
+mkdir -p bin
 cd build
 cmake ..
 make
-cp command_parser.x ../
-cp serial_reader.x ../
+cp *.x ../bin

@@ -2,8 +2,6 @@
 #include <string>
 #include <algorithm> // For strtolower
 #include <exception>
-#include <bitset> //Binary representation
-#include <unistd.h>
 #include "command_parser.h"
 
 using namespace std;

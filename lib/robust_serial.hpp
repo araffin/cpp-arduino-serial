@@ -44,6 +44,7 @@ void write_u32(std::fstream &file, uint16_t num);
  * @return the order received
  */
 Order read_order(SerialPort &serial_port, const unsigned int timeout_ms);
+Order read_order(std::fstream &file);
 
 /**
  * Read one byte from a serial port and convert it to a 8 bits int
@@ -51,6 +52,8 @@ Order read_order(SerialPort &serial_port, const unsigned int timeout_ms);
  * @return the decoded number
  */
 int8_t read_i8(SerialPort &serial_port);
+// Variant for reading file
+int8_t read_i8(std::fstream &file);
 
 /**
  *  Read two bytes from a serial port and convert it to a 16 bits int
@@ -58,7 +61,8 @@ int8_t read_i8(SerialPort &serial_port);
  * @return the decoded number
  */
 int16_t read_i16(SerialPort &serial_port);
-
+// Variant for reading file
+int16_t read_i16(std::fstream &file);
 /**
  * Read two bytes from a serial port and convert it to a 16 bits unsigned int
  * @param  serial_port SerialPort object
@@ -72,5 +76,8 @@ uint16_t read_u16(SerialPort &serial_port);
  * @return the decoded number
  */
 int32_t read_i32(SerialPort &serial_port);
+// Variant for reading file
+int32_t read_i32(std::fstream &file);
+
 
 #endif

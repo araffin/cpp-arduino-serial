@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
-#include <algorithm> // For strtolower
 #include <exception>
-#include <bitset>//Binary representation
+#include <bitset> //Binary representation
 #include "serial_reader.h"
 
 using namespace std;
@@ -10,22 +9,22 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-	string defaultFileName = DEFAULT_PORT;
-	string serialFileName = "";
+	string default_filename = DEFAULT_PORT;
+	string serial_filename = "";
 
-	cout << "Enter the name of the serial file (default: " << defaultFileName << " )" << endl;
-	getline(cin, serialFileName);
+	cout << "Enter the name of the serial file (default: " << default_filename << " )" << endl;
+	getline(cin, serial_filename);
 
-	if(serialFileName.empty())
+	if(serial_filename.empty())
 	{
-		cout << "Using default serial file : " << defaultFileName << endl;
-		serialFileName = defaultFileName;
+		cout << "Using default serial file : " << default_filename << endl;
+		serial_filename = default_filename;
 	}
 
-	SerialPort serial_port(serialFileName);
+	SerialPort serial_port(serial_filename);
 
-	const unsigned int msTimeout = TIMEOUT_MS;
-	Order currentOrder;
+	const unsigned int timeout_ms = TIMEOUT_MS;
+	Order current_order;
 	serial_port.Open(SerialPort::BAUD_115200, SerialPort::CHAR_SIZE_8,
 									 SerialPort::PARITY_NONE, SerialPort::STOP_BITS_1,
 									 SerialPort::FLOW_CONTROL_NONE);
@@ -35,7 +34,7 @@ int main(int argc, char const *argv[])
 		// while (!serial_port.IsDataAvailable()){}
 		try
 		{
-			currentOrder = read_order(serial_port, msTimeout);
+			current_order = read_order(serial_port, timeout_ms);
 			//  ReadTimeout
 		}
 		catch(exception& e)
@@ -45,7 +44,7 @@ int main(int argc, char const *argv[])
 			return 0;
 		}
 
-		switch (currentOrder)
+		switch (current_order)
 		{
 			case HELLO:
 			{
@@ -87,14 +86,12 @@ int main(int argc, char const *argv[])
 			}
 			default:
 			{
-				bitset<8> b(currentOrder);
+				bitset<8> b(current_order);
 				cout << "Unknown command:" << b << endl;
 			}
 		}
 	}
 
 	serial_port.Close();
-  // WEIRD STUFF DO NOT REMOVE LINE FOR NOW
-  stoul("1");
   return 0;
 }

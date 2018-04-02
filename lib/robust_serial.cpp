@@ -39,6 +39,11 @@ Order read_order(SerialPort &serial_port, const unsigned int timeout_ms)
   return (Order) buffer[0];
 }
 
+Order read_order(fstream &serial_file)
+{
+  return (Order) read_i8(serial_file);
+}
+
 int8_t read_i8(SerialPort &serial_port)
 {
   SerialPort::DataBuffer buffer;
@@ -47,11 +52,25 @@ int8_t read_i8(SerialPort &serial_port)
   return (int8_t) static_cast<signed char>(buffer[0]);
 }
 
+int8_t read_i8(fstream &file)
+{
+	char buffer[1];
+  file.read(buffer, 1);
+  return (int8_t) buffer[0];
+}
+
 int16_t read_i16(SerialPort &serial_port)
 {
   SerialPort::DataBuffer buffer;
   serial_port.Read(buffer, 2);
   return (((int16_t) buffer[0]) & 0xff) | (((int16_t) buffer[1]) << 8 & 0xff00);
+}
+
+int16_t read_i16(fstream &file)
+{
+  char buffer[2];
+  file.read(buffer, 2);
+	return (((int16_t) buffer[0]) & 0xff) | (((int16_t) buffer[1]) << 8 & 0xff00);
 }
 
 uint16_t read_u16(SerialPort &serial_port)
@@ -65,5 +84,12 @@ int32_t read_i32(SerialPort &serial_port)
 {
   SerialPort::DataBuffer buffer;
   serial_port.Read(buffer, 4);
+  return (((int32_t) buffer[0]) & 0xff) | (((int32_t) buffer[1]) << 8 & 0xff00) | (((int32_t) buffer[2]) << 16 & 0xff0000) | (((int32_t) buffer[3]) << 24 & 0xff000000);
+}
+
+int32_t read_i32(fstream &file)
+{
+  char buffer[4];
+  file.read(buffer, 4);
   return (((int32_t) buffer[0]) & 0xff) | (((int32_t) buffer[1]) << 8 & 0xff00) | (((int32_t) buffer[2]) << 16 & 0xff0000) | (((int32_t) buffer[3]) << 24 & 0xff000000);
 }
