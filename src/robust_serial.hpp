@@ -6,7 +6,7 @@
 #include "order.h"
 
 /**
- * Send one order (one byte) to the other arduino
+ * Send one order (one byte)
  * @param order the order to send
  */
 void write_order(std::fstream &file, enum Order order);
@@ -56,7 +56,7 @@ int8_t read_i8(SerialPort &serial_port);
 int8_t read_i8(std::fstream &file);
 
 /**
- *  Read two bytes from a serial port and convert it to a 16 bits int
+ * Read two bytes from a serial port and convert it to a 16 bits int
  * @param  serial_port SerialPort object
  * @return the decoded number
  */
