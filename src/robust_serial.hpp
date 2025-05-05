@@ -2,8 +2,13 @@
 #define ROBUST_SERIAL_H
 #include <fstream>
 #include <cstdint>  // int8_t, int16_t, ...
-#include <SerialStream.h>  // libserial-dev
+// libserial-dev
+#include <libserial/SerialStream.h>
+#include <libserial/SerialPort.h>
+#include <libserial/SerialPortConstants.h>
 #include "order.h"
+
+using namespace LibSerial;
 
 /**
  * Send one order (one byte)
