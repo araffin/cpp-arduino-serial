@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: |
-          apt-get install libserial-dev
+          sudo apt-get install libserial-dev
 
       - name: Build and run examples
         run: |
