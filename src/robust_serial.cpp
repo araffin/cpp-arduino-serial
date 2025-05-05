@@ -25,7 +25,7 @@ void write_i32(fstream &file, int32_t num)
   file.write((char *)buffer, 4*sizeof(int8_t));
 }
 
-void write_u32(fstream &file, uint16_t num)
+void write_u16(fstream &file, uint16_t num)
 {
 	uint8_t buffer[2] = {(uint8_t) (num & 0xff), (uint8_t) (num >> 8)};
 	file.write((char *)buffer, 2*sizeof(uint8_t));
