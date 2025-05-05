@@ -2,8 +2,13 @@
 #define ROBUST_SERIAL_H
 #include <fstream>
 #include <cstdint>  // int8_t, int16_t, ...
-#include <SerialStream.h>  // libserial-dev
+// libserial-dev
+#include <libserial/SerialStream.h>
+#include <libserial/SerialPort.h>
+#include <libserial/SerialPortConstants.h>
 #include "order.h"
+
+using namespace LibSerial;
 
 /**
  * Send one order (one byte)
@@ -35,7 +40,7 @@ void write_i32(std::fstream &file, int32_t num);
  * Send a two bytes unsigned (max 2**16 -1) int via the serial
  * @param num the number to send
  */
-void write_u32(std::fstream &file, uint16_t num);
+void write_u16(std::fstream &file, uint16_t num);
 
 /**
  * Read one byte from the serial and cast it to an Order
